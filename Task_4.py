@@ -58,11 +58,12 @@ class HPlaptop(Laptop):
     def dynamics(self):
         print(f'Dynamics: {self.dynamics_type}')
 
-laptop = HPlaptop('HPlaptop', '2017', 'MVA', 'Butterfly keyboard', 'mat', 'Full HD', 'USB, LPT', 'OEM')
+if __name__ == '__main__':
+    laptop = HPlaptop('HPlaptop', '2017', 'MVA', 'Butterfly keyboard', 'mat', 'Full HD', 'USB, LPT', 'OEM')
 
-laptop.screen()
-laptop.keyboard()
-laptop.touchpad()
-laptop.webcam()
-laptop.ports()
-laptop.dynamics()
+    laptop.screen()
+    laptop.keyboard()
+    laptop.touchpad()
+    laptop.webcam()
+    laptop.ports()
+    laptop.dynamics()

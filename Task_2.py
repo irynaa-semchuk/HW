@@ -20,10 +20,6 @@ class Arm:
     def __init__(self, command):
         self.command = command
 
-print('______Composition______')
-person = Person()
-for arm in person.arms:
-    print(arm.command)
 
 '''
 b.
@@ -46,7 +42,13 @@ class Screen:
         self.size = size
 
 
-print('_____Aggregation______')
-scr = Screen('6.3')
-ph = CellPhone(scr)
-print(ph.screen.size)
+if __name__ == '__main__':
+    print('______Composition______')
+    person = Person()
+    for arm in person.arms:
+        print(arm.command)
+
+    print('_____Aggregation______')
+    scr = Screen('6.3')
+    ph = CellPhone(scr)
+    print(ph.screen.size)
