@@ -21,6 +21,7 @@ class Profile:
     def __str__(self):
         return f'All profile information: {self.info}'
 
-human = Profile('Ira', 'Semchuk', '098 618 3927', 'Lviv', 'iryna@gmail.com', '21.02.1999', '22', 'mate')
+if __name__ == '__main__':
+    human = Profile('Ira', 'Semchuk', '098 618 3927', 'Lviv', 'iryna@gmail.com', '21.02.1999', '22', 'mate')
 
-print(human)
+    print(human)

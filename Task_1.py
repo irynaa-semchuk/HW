@@ -41,29 +41,6 @@ class Rabbit(Animals):
     def jump(self):
         print(f'{self.__class__.__name__} jumping')
 
-cat = Cat()
-dog = Dog()
-chicken = Chicken()
-goose = Goose()
-rabbit = Rabbit()
-cat.eat()
-goose.sleep()
-rabbit.sleep()
-goose.eat()
-chicken.sit()
-
-print('______Instance of the Animals class________')
-c = isinstance(cat, Animals)
-d = isinstance(dog, Animals)
-ch = isinstance(chicken, Animals)
-g = isinstance(goose, Animals)
-r = isinstance(rabbit, Animals)
-
-print(f'Cat - {c}')
-print(f'Dog - {d}')
-print(f'Chicken - {ch}')
-print(f'Goose - {g}')
-print(f'Rabbit - {r}')
 
 '''
 1.a. Create a new class Human and use multiple inheritance to create Centaur class,
@@ -104,11 +81,36 @@ class Centaur(Animals, Human):
     def info(self):
         print(f'Human {self.name} - {self.age}')
 
-print('______Multiple inheritance_____')
-centaur = Centaur('Sofia', 20)
-centaur.eat()
-centaur.sleep()
-centaur.study()
-centaur.work()
-centaur.sit()
-centaur.info()
+if __name__ == '__main__':
+    cat = Cat()
+    dog = Dog()
+    chicken = Chicken()
+    goose = Goose()
+    rabbit = Rabbit()
+    cat.eat()
+    goose.sleep()
+    rabbit.sleep()
+    goose.eat()
+    chicken.sit()
+
+    print('______Instance of the Animals class________')
+    c = isinstance(cat, Animals)
+    d = isinstance(dog, Animals)
+    ch = isinstance(chicken, Animals)
+    g = isinstance(goose, Animals)
+    r = isinstance(rabbit, Animals)
+
+    print(f'Cat - {c}')
+    print(f'Dog - {d}')
+    print(f'Chicken - {ch}')
+    print(f'Goose - {g}')
+    print(f'Rabbit - {r}')
+
+    print('______Multiple inheritance_____')
+    centaur = Centaur('Sofia', 20)
+    centaur.eat()
+    centaur.sleep()
+    centaur.study()
+    centaur.work()
+    centaur.sit()
+    centaur.info()
