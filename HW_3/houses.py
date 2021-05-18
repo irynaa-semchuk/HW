@@ -7,7 +7,7 @@ class House:
         return f'House with a price of {self.cost}'
 
     def apply_disc(self, disc):
-        self.cost -= (self.cost / disc)
+        self.cost -= (self.cost * disc)
         return self.cost
 
 
