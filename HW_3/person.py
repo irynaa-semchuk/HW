@@ -35,7 +35,7 @@ class Human(Person):
         print(f'Availability of money {self.available_of_money}')
 
     def buy_house(self, house, realtor):
-        if self.available_of_money <= house.cost:
+        if self.available_of_money < house.cost:
             print(f'{self.name} dont have money for buy this house')
         elif house.area >= 300:
             print('The house is too large')
