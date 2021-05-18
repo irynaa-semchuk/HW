@@ -38,7 +38,7 @@ class Realtor(metaclass=RealtorMeta):
         chance = random.randrange(0, 11)
         if chance >= 10:
             human.available_of_money = human.available_of_money - house.cost
-            print(f'Realtor {self.name} steal money. Now {human.name} has {person.available_of_money} money')
+            print(f'Realtor {self.name} steal money. Now {human.name} has {human.available_of_money} money')
             return chance
         else:
             print('The theft failed')
