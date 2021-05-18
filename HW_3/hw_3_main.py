@@ -12,7 +12,7 @@ if __name__ == '__main__':
     person.info()
     person.make_money()
 
-    realtor = Realtor('Ira', 0.20, [house1, house2, house3, smallhouse])
+    realtor = Realtor('Ira', 20, [house1, house2, house3, smallhouse])
     realtor.info_houses()
     realtor.give_discount(house1)
     print("----House 1-----")
