@@ -28,14 +28,14 @@ class Human(Person):
         self.salary = random.randint(8000, 12000)
 
     def info(self):
-        print(f'My name {self.name}. I am {self.age} years old.')
+        print(f'My name {self.name}. I am {self.age} years old .')
 
     def make_money(self):
         self.available_of_money += self.salary
-        print(f'Availability of money {self.available_of_money}')
+        print(f'Availability of money {self.available_of_money} ')
 
     def buy_house(self, house, realtor):
-        if self.available_of_money <= house.cost:
+        if self.available_of_money < house.cost:
             print(f'{self.name} dont have money for buy this house')
         elif house.area >= 300:
             print('The house is too large')
@@ -46,5 +46,4 @@ class Human(Person):
             realtor.houses.remove(house)
             self.available_of_money -= house.cost
             self.own_home.append(house)
-
-        return 'The house was bought'
+            return 'The house was bought'
