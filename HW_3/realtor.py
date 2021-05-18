@@ -29,8 +29,8 @@ class Realtor(metaclass=RealtorMeta):
 
     def give_discount(self, house):
         if house in self.houses:
-            print(f'\nRealtor {self.name} can give a discount of {house.apply_disc(self.discount)}')
-            return house.apply_disc(self.discount)
+            print(f'\nRealtor {self.name} can give a discount of {house.apply_disc(self.discount)}.'
+                  f'\nThe discount is {self.discount}%')
         else:
             print(f'There is no such house in the list')
 
