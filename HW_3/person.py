@@ -46,5 +46,4 @@ class Human(Person):
             realtor.houses.remove(house)
             self.available_of_money -= house.cost
             self.own_home.append(house)
-
-        return 'The house was bought'
+            return 'The house was bought'
