@@ -1,0 +1,105 @@
+1. Insert dump (my_items) to your local database. 
+mysql> CREATE DATABASE my_items;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_items           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.04 sec)
+
+mysql> USE my_items;
+Database changed
+
+- Create additional table phones with fields:id, phone_name, company_id, user_id 
+mysql> CREATE TABLE phones ( id int NOT NULL AUTO_INCREMENT, phone_name varchar(128) NULL, company_id int NOT NULL, user_id int NOT NULL, PRIMARY KEY (id) );
+Query OK, 0 rows affected (0.01 sec)
+
+- Create additional table phone_companies with fields:id, name
+mysql> CREATE TABLE phone_companies (id INT NOT NULL AUTO_INCREMENT, name CHAR(255), PRIMARY KEY(id));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SHOW COLUMNS FROM phone_companies;
++-------+-----------+------+-----+---------+----------------+
+| Field | Type      | Null | Key | Default | Extra          |
++-------+-----------+------+-----+---------+----------------+
+| id    | int       | NO   | PRI | NULL    | auto_increment |
+| name  | char(255) | YES  |     | NULL    |                |
++-------+-----------+------+-----+---------+----------------+
+2 rows in set (0.06 sec)
+
+- Write select and save it to file to get users is developers. 
+mysql> SELECT * FROM users WHERE is_developer=1;
++----+------------+-----------+---------------------------------------------------+--------------+
+| id | first_name | last_name | about_me                                          | is_developer |
++----+------------+-----------+---------------------------------------------------+--------------+
+|  1 | Liubomyr   | Luzhnyi   | bla bla bla bla bla lb a bla bla bla bla bla bla  |            1 |
+|  2 | Liubomyr1  | Luzhnyi1  | bla bla bla bla bla lb a bla bla bla bla bla bla1 |            1 |
+|  3 | Vasyl      | Mykutko   | bla bla bla bla                                   |            1 |
++----+------------+-----------+---------------------------------------------------+--------------+
+3 rows in set (0.00 sec)
+
+iryna@ubuntu:~$ sudo mysql -u root -p my_items -e "SELECT * FROM users WHERE is_developer=1;" > devsloper.txt
+
+- Insert xiaomi, apple, samsung to companies. 
+mysql> INSERT INTO phone_companies (name) VALUES ("xiaomi"),("apple"),("samsung" 
+    -> );
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+- Insert 3 phone (with any data) to phones. 
+mysql> INSERT INTO phones (phone_name, company_id, user_id) VALUES ("Xiaomi redmi note 9", 3, 1), ("iPhone 11s", 2, 3), ("Samsung Galaxy", 1, 4);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM phone_companies;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | xiaomi  |
+|  2 | apple   |
+|  3 | samsung |
++----+---------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM phones;
++----+---------------------+------------+---------+
+| id | phone_name          | company_id | user_id |
++----+---------------------+------------+---------+
+|  1 | Xiaomi redmi note 9 |          3 |       1 |
+|  2 | iPhone 11s          |          2 |       3 |
+|  3 | Samsung Galaxy      |          1 |       4 |
++----+---------------------+------------+---------+
+3 rows in set (0.00 sec)
+
+- Write select and save it to file to get phones where company_id=XIAOMI COMPANY ID.
+mysql> SELECT * from phones WHERE company_id IN (SELECT id FROM phone_companies WHERE name="xiaomi");
++----+----------------+------------+---------+
+| id | phone_name     | company_id | user_id |
++----+----------------+------------+---------+
+|  3 | Samsung Galaxy |          1 |       4 |
++----+----------------+------------+---------+
+1 row in set (0.00 sec)
+
+iryna@ubuntu:~$ sudo mysql -u root -p my_items -e "SELECT * FROM phones WHERE company_id IN (SELECT id FROM phone_companies WHERE name = 'xiaomi');" > phones.txt
+
+send file dump of your database and file with your select and insert queries.
+iryna@ubuntu:~$ sudo mysqldump -u root my_items > items.sql
+
+
+2.* Select all users which have phones. 
+mysql> SELECT * FROM users WHERE id IN (SELECT user_id FROM phones);
++----+------------+-----------+--------------------------------------------------+--------------+
+| id | first_name | last_name | about_me                                         | is_developer |
++----+------------+-----------+--------------------------------------------------+--------------+
+|  1 | Liubomyr   | Luzhnyi   | bla bla bla bla bla lb a bla bla bla bla bla bla |            1 |
+|  3 | Vasyl      | Mykutko   | bla bla bla bla                                  |            1 |
++----+------------+-----------+--------------------------------------------------+--------------+
+2 rows in set (0.01 sec)
+
