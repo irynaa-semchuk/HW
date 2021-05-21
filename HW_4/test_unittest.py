@@ -6,7 +6,7 @@ class TestFunctions(unittest.TestCase):
     def test_add(self):
         self.assertEqual(Calculator.add(3, 9), 12)
         self.assertEqual(Calculator.add(2, 9), 11)
-        self.assertEqual(Calculator.add(1, 9), 10)
+        self.assertEqual(Calculator.add(9, 1), 10)
         self.assertRaises(TypeError, Calculator.add, [1, 2], 5)
 
     def test_subtract(self):
@@ -22,12 +22,12 @@ class TestFunctions(unittest.TestCase):
         self.assertRaises(TypeError, Calculator.multiply, [3, 6], 5)
 
     def test_divide(self):
-        self.assertEqual(Calculator.divide(2, 6), 3)
-        self.assertEqual(Calculator.divide(2, 12), 6)
-        self.assertEqual(Calculator.divide(2, 30), 15)
+        self.assertEqual(Calculator.divide(6, 2), 3)
+        self.assertEqual(Calculator.divide(12, 2), 6)
+        self.assertEqual(Calculator.divide(30, 2), 15)
         with self.assertRaises(ValueError):
             Calculator.divide(10, 0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

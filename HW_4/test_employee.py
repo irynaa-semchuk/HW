@@ -23,8 +23,6 @@ class TestEmployee(unittest.TestCase):
         self.assertEqual(self.emp_2.email, 'Solomiay.Vashisht@email.com')
 
     def test_fullname(self):
-        self.assertEqual(self.emp_0.fullname, 'Jane Smith')
-
         self.assertEqual(self.emp_1.fullname, 'Saral Gyaan')
         self.assertEqual(self.emp_2.fullname, 'Udit Vashisht')
 
@@ -42,20 +40,19 @@ class TestEmployee(unittest.TestCase):
         self.assertEqual(self.emp_1.pay, 1166)
 
         self.emp_2.apply_raise()
-        self.assertEqual(self.emp_2.pay, 1224)
+        self.assertEqual(self.emp_2.pay, 1260)
 
     @patch('employee.requests.get')
     def test_monthly_schedule(self, mock_get):
         mock_get.return_value.ok = True
         mock_get.return_value.text = 'ok'
-        response = self.emp_0.monthly_schedule('ira')
-        print(response)
-        self.assertEqual(response, 'ok')
+        res = self.emp_0.monthly_schedule('ira')
+        print(res)
+        self.assertEqual(res, 'ok')
         mock_get.return_value.ok = False
-        response = self.emp_0.monthly_schedule('ira')
-        print(response)
-        self.assertEqual(response, 'Bad Response!')
-
+        res = self.emp_0.monthly_schedule('ira')
+        print(res)
+        self.assertEqual(res, 'Bad Response!')
 
 if __name__ == "__main__":
     unittest.main()
