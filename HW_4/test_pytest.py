@@ -27,9 +27,9 @@ def test_multiply():
 
 
 def test_divide():
-    assert Calculator.divide(2, 6) == 3
-    assert Calculator.divide(2, 12) == 6
-    assert Calculator.divide(2, 18) == 9
+    assert Calculator.divide(6, 2) == 3
+    assert Calculator.divide(12, 2) == 6
+    assert Calculator.divide(18, 2) == 9
     with pytest.raises(ValueError):
         Calculator.divide(2, 0)
 
