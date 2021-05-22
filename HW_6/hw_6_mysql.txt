@@ -2,6 +2,8 @@
 mysql> CREATE DATABASE my_items;
 Query OK, 1 row affected (0.05 sec)
 
+iryna@ubuntu:~$ sudo mysqldump -u root my_items < my_items.sql
+
 mysql> SHOW DATABASES;
 +--------------------+
 | Database           |
