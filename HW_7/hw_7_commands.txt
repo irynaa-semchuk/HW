@@ -1,0 +1,63 @@
+1. Insert dump of shop.sql to your local database 
+iryna@ubuntu:~$ sudo mysql -u root shop < shop.sql
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| my_items           |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> USE shop;
+
+2. Modify table products add user_id as foreign key  
+mysql> ALTER TABLE products ADD COLUMN user_id INT NOT NULL;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW COLUMNS FROM products;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int          | NO   | PRI | NULL    | auto_increment |
+| title       | varchar(255) | NO   |     | NULL    |                |
+| meta_title  | char(255)    | YES  |     | NULL    |                |
+| description | varchar(400) | YES  |     | NULL    |                |
+| price       | double       | NO   |     | NULL    |                |
+| old_price   | double       | YES  |     | NULL    |                |
+| is_active   | tinyint(1)   | YES  |     | NULL    |                |
+| user_id     | int          | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+
+mysql> UPDATE products SET user_id = 1 WHERE id = 1;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> ALTER TABLE products ADD FOREIGN KEY (user_id) REFERENCES users(id);
+Query OK, 1 row affected (0.04 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+3. Select users their products, collections and images and write this query to file.
+mysql> SELECT users.last_name, users.email, products.title, products.meta_title, categories.meta_title,products.price,  product_images.file FROM users
+    -> JOIN products ON users.id = products.user_id
+    -> JOIN categories_products ON products.id = categories_products.product_id
+    -> JOIN categories ON categories_products.category_id = categories.id
+    -> JOIN product_images ON products.id = product_images.product_id;
++-----------+---------------------------+-------+----------------------+--------------+----------+------------------------------------------------------------------------------------+
+| last_name | email                     | title | meta_title           | meta_title   | price    | file                                                                               |
++-----------+---------------------------+-------+----------------------+--------------+----------+------------------------------------------------------------------------------------+
+| Luzhnyi   | lubomur.luzhnuy@gmail.com | Rolex | Rolex | Watch | Shop | Watch | Shop | 14000.25 | https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg   |
+| Luzhnyi   | lubomur.luzhnuy@gmail.com | Rolex | Rolex | Watch | Shop | Watch | Shop | 14000.25 | 11https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg |
+| Luzhnyi   | lubomur.luzhnuy@gmail.com | Rolex | Rolex | Watch | Shop | Watch | Shop | 14000.25 | 2https://res.cloudinary.com/hz3gmuqw6/image/upload/v1621495544/cooking_yx2glg.jpg  |
++-----------+---------------------------+-------+----------------------+--------------+----------+------------------------------------------------------------------------------------+
+3 rows in set (0.00 sec)
+
+iryna@ubuntu:~$ sudo mysql -u root -p shop -e "SELECT users.last_name, users.email, products.title, products.meta_title, categories.meta_title,products.price,  product_images.file FROM users JOIN products ON users.id = products.user_id JOIN categories_products ON products.id = categories_products.product_id JOIN categories ON categories_products.category_id = categories.id JOIN product_images ON products.id = product_images.product_id;" > select_task3.txt
+
+
