@@ -19,7 +19,7 @@ class TestFunctions(unittest.TestCase):
         self.assertEqual(Calculator.multiply(2, 3), 6)
         self.assertEqual(Calculator.multiply(3, 3), 9)
         self.assertEqual(Calculator.multiply(2, 5), 10, "Should be 10")
-        self.assertRaises(TypeError, Calculator.multiply, [3, 6], 5)
+        self.assertRaises(TypeError, Calculator.multiply, None, 5)
 
     def test_divide(self):
         self.assertEqual(Calculator.divide(6, 2), 3)
