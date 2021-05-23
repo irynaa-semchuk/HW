@@ -23,7 +23,7 @@ def test_multiply():
     assert Calculator.multiply(2, 9) == 18
     assert Calculator.multiply(3, 4) == 12
     with pytest.raises(TypeError):
-        Calculator.multiply([1,5], 2)
+        Calculator.multiply(None, 2)
 
 
 def test_divide():
