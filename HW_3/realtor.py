@@ -28,9 +28,9 @@ class Realtor(metaclass=RealtorMeta):
         return self.houses
 
     def give_discount(self, house):
-        if self.houses is not []:
-            print(f'\nRealtor {self.name} can give a discount of {house.apply_disc(self.discount)}')
-            return house.apply_disc(self.discount)
+        if house in self.houses:
+            print(f'\nRealtor {self.name} can give a discount of {house.apply_disc(self.discount)}.'
+                  f'\nThe discount is {self.discount}%')
         else:
             print(f'There is no such house in the list')
 
@@ -38,7 +38,7 @@ class Realtor(metaclass=RealtorMeta):
         chance = random.randrange(0, 11)
         if chance >= 10:
             human.available_of_money = human.available_of_money - house.cost
-            print(f'Realtor {self.name} steal money. Now {human.name} has {person.available_of_money} money')
+            print(f'Realtor {self.name} steal money. Now {human.name} has {human.available_of_money} money')
             return chance
         else:
             print('The theft failed')
