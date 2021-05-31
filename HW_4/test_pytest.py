@@ -41,6 +41,7 @@ def test_multiply_negative_case():
         Calculator.multiply([0, 8], {0, 8})
 
 
+
 def test_divide():
     assert Calculator.divide(6, 2) == 3
     assert Calculator.divide(12, 2) == 6
