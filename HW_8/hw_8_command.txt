@@ -1,0 +1,292 @@
+***********Task_1***********
+iryna@ubuntu:~/my_doker$docker build -t hw_flask .
+
+iryna@ubuntu:~/my_doker$ docker images
+REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
+hw_flask             latest              cc2b42beceba        15 minutes ago      422MB
+<none>               <none>              075b71a5c8a9        22 minutes ago      101MB
+nginx                latest              d1a364dc548d        2 days ago          133MB
+mariadb              latest              eff629089685        2 days ago          408MB
+ubuntu               20.04               7e0aa2d69a15        4 weeks ago         72.7MB
+ubuntu               latest              7e0aa2d69a15        4 weeks ago         72.7MB
+hello-world          latest              d1165f221234        2 months ago        13.3kB
+scrapinghub/splash   latest              9364575df985        9 months ago        1.89GB
+
+iryna@ubuntu:~/my_doker$ docker run -p 8000:8080 hw_flask
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.3:8080/ (Press CTRL+C to quit)
+
+iryna@ubuntu:~/my_doker$ docker run -d hw_flask
+d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d
+iryna@ubuntu:~/my_doker$ docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+d1d5d3c97156        hw_flask            "/bin/sh -c 'FLASK_A…"   29 seconds ago      Up 28 seconds                           competent_neumann
+ce6848e95545        hw_flask            "/bin/sh -c 'FLASK_A…"   15 minutes ago      Up 15 minutes                           recursing_hofstadter
+
+iryna@ubuntu:~/my_doker$ docker attach d1
+iryna@ubuntu:~/my_doker$ docker stop d1
+d1
+
+iryna@ubuntu:~/my_doker$ docker inspect d1
+[
+    {
+        "Id": "d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d",
+        "Created": "2021-05-27T17:30:18.624478388Z",
+        "Path": "/bin/sh",
+        "Args": [
+            "-c",
+            "FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 137,
+            "Error": "",
+            "StartedAt": "2021-05-27T17:30:19.159248963Z",
+            "FinishedAt": "2021-05-27T17:34:24.54884101Z"
+        },
+        "Image": "sha256:cc2b42beceba889849390f428e6ed16de474e1996f0203aaf42917aaf0300192",
+        "ResolvConfPath": "/var/snap/docker/common/var-lib-docker/containers/d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d/resolv.conf",
+        "HostnamePath": "/var/snap/docker/common/var-lib-docker/containers/d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d/hostname",
+        "HostsPath": "/var/snap/docker/common/var-lib-docker/containers/d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d/hosts",
+        "LogPath": "/var/snap/docker/common/var-lib-docker/containers/d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d/d1d5d3c97156b16bc8df7ab48ca02c60c28fc0c9f6d727b1f1bc9af28e6c728d-json.log",
+        "Name": "/competent_neumann",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Capabilities": null,
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/snap/docker/common/var-lib-docker/overlay2/c8daf95120fc4599dbc973bd8bc808be7953fd1f2a89db4ab42b0871b0e4afa1-init/diff:/var/snap/docker/common/var-lib-docker/overlay2/4b7ff8e4bd4c3836cccfd7f01be022344ef6f3afa1a2203a71048518a52b733e/diff:/var/snap/docker/common/var-lib-docker/overlay2/e36a8255f6f24109cade4f5dd9dc7854b19ab601332146c0e38b87f2e0a06719/diff:/var/snap/docker/common/var-lib-docker/overlay2/1e81db35b27fec2c4d6ad0c033f88a5e6a6d3635a5dd03957962aac6e3e9bca9/diff:/var/snap/docker/common/var-lib-docker/overlay2/d9d9fbe06c44b01fa4af0a30344d0b0b9a838af2df4c162cfd4e0a6deae51502/diff:/var/snap/docker/common/var-lib-docker/overlay2/344ba7eac15b5d1d54e4b6f83d403810edf78c9479326aade3aca664755ef183/diff:/var/snap/docker/common/var-lib-docker/overlay2/917d4d5926085969a906fe1029b59d94e531ac7f7b4749b55eb18ce7f154eabf/diff",
+                "MergedDir": "/var/snap/docker/common/var-lib-docker/overlay2/c8daf95120fc4599dbc973bd8bc808be7953fd1f2a89db4ab42b0871b0e4afa1/merged",
+                "UpperDir": "/var/snap/docker/common/var-lib-docker/overlay2/c8daf95120fc4599dbc973bd8bc808be7953fd1f2a89db4ab42b0871b0e4afa1/diff",
+                "WorkDir": "/var/snap/docker/common/var-lib-docker/overlay2/c8daf95120fc4599dbc973bd8bc808be7953fd1f2a89db4ab42b0871b0e4afa1/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "d1d5d3c97156",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": null,
+            "Image": "hw_flask",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/bin/sh",
+                "-c",
+                "FLASK_APP=/opt/app.py flask run --host=0.0.0.0 --port=8080"
+            ],
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "7daa271ab4b7abf0603a5ac09f1f29b9c11998a9f0ffbb166e45bf850b3ce3ea",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/run/snap.docker/netns/7daa271ab4b7",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "818f2c66dd7ade335f7b9199ef6c90d23772417e51fca51b631d05d0aa561e1e",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+iryna@ubuntu:~/my_doker$ docker logs d1
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.3:8080/ (Press CTRL+C to quit)
+iryna@ubuntu:~/my_doker$ docker build -t hw_flask .
+iryna@ubuntu:~/my_doker$ docker run -d hw_flask
+0b49d840b2e3eef824fdff664999105acddbd534cd6e55014e87ed877a5e4be9
+iryna@ubuntu:~/my_doker$ docker run -p 8000:8080 hw_flask
+ * Serving Flask app '/opt/app.py' (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+ * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://172.17.0.4:8080/ (Press CTRL+C to quit)
+172.17.0.1 - - [27/May/2021 17:55:08] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/May/2021 17:55:09] "GET /favicon.ico HTTP/1.1" 404 -
+172.17.0.1 - - [27/May/2021 17:56:46] "GET / HTTP/1.1" 200 -
+
+********Task_3**********
+iryna@ubuntu:~/my_doker$ docker run -it --name my_storyy ubuntu
+root@c836a17f02aa:/# echo "Hello my name is Ira.And today the weather is good outside." > story.txt
+root@c836a17f02aa:/# apt-get update && apt-get install cowsay
+root@c836a17f02aa:/# story.txt|cowsay
+bash: cowsay: command not found
+root@c836a17f02aa:/# cat story.txt            
+Hello my name is Ira.And today the weather is good outside.
+root@c836a17f02aa:/# cat story.txt|/usr/games/cowsay
+ ____________________________________
+/ Hello my name is Ira.And today the \
+\ weather is good outside.           /
+ ------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+iryna@ubuntu:~/my_doker$ docker run -it --name my_story_2 ubuntu
+root@7be27ac39395:/# ls
+bin   dev  home  lib32  libx32  mnt  proc  run   srv  tmp  var
+boot  etc  lib   lib64  media   opt  root  sbin  sys  usr
+root@7be27ac39395:/# cat joke.txt       
+cat: joke.txt: No such file or directory
+root@7be27ac39395:/# cat story.txt|/usr/games/cowsay
+bash: /usr/games/cowsay: No such file or directory
+cat: story.txt: No such file or directory
+
+
+
