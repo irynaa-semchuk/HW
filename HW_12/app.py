@@ -21,7 +21,7 @@ def calc(x, y, oper):
     elif oper == 'mul':
         return render_template('calc.html', x=x, y=y, result=x * y, symbol="*")
     else:
-        return render_template('calc.html', func="Data was entered incorrectly")
+        return render_template('calc.html', result="Data was entered incorrectly")
 
 
 if __name__ == '__main__':
