@@ -1,9 +1,9 @@
 import pytest
 from game import TicTacToe
 
+game = TicTacToe()
+
 def setup_module():
-    global game
-    game = TicTacToe()
     game.board[4] = "X"
     game.board[6] = "O"
 
