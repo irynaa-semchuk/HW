@@ -16,12 +16,11 @@ def test_search_weather(client):
     assert b"Weather for London" in response.data
     
 def test_search_weather_mock(client, mocker):
-Config.WEATHER_API_KEY = "eb693de49dmsh5020a2f638740f4p1f0889jsnf4b5bc7fbd2f"
+    Config.WEATHER_API_KEY = "eb693de49dmsh5020a2f638740f4p1f0889jsnf4b5bc7fbd2f"
     Config.WEATHER_API_URL = "https://community-open-weather-map.p.rapidapi.com/find"
     Config.WEATHER_API_HOST = "community-open-weather-map.p.rapidapi.com"
     mocker.patch('requests.request', side_effect=MockApi)
     response = client.post("/search", data={"cities": "london"})
-    print(response)
     assert response.status_code == 200
     print(response.data)
     assert b"Weather for London" in response.data
