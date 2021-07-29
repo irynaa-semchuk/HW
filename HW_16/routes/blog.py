@@ -81,13 +81,13 @@ class Users(Resource):
 class User_Update(Resource):
     def post(self,id):
         user = User.query.get(id)
-        username = request.json['username']
-        email = request.json['email']
-
-        user.email = email
-        user.username = username
+        data = request.json
+        user.username = data.get('username')
+        user.email = data.get('email')
+        user.created = data.get('created')
+        user.bio = data.get('bio')
+        user.admin = data.get('admin')
         db.session.commit()
-
         return user.serialize
 
 
