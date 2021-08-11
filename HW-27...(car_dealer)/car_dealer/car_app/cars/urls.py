@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.cars.views import CarsListView, CarsDetailView, serialized_cars
+from car_app.cars.views import CarsListView, CarsDetailView, serialized_cars
 
 app_name = 'cars'
 
