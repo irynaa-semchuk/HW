@@ -1,9 +1,7 @@
 <h1>Cars</h1>
 <div>
-    <table class="table-primary">
   {% for car in cars %}
      {{ car.id }} - {{ car.model.name }} - {{ car.model.brand.name }} - {{ car.price }} USD -
     <a href="./{{ car.slug }}">Детальніше</a> <br/>
   {% endfor %}
-        </table>
 </div>
