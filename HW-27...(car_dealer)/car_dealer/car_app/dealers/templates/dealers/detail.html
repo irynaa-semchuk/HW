@@ -1,0 +1,14 @@
+<h1 style="background-color:DodgerBlue;">Dealer: {{ object.title }}</h1>
+<div>
+    <p style="color:MediumSeaGreen;">Email: {{ object.e_mail }}</p>
+    <p style="color:MediumSeaGreen;">City: {{ object.city.name }}</p>
+    <p style="color:MediumSeaGreen;">Country: {{ object.city.country.name }}</p>
+    <p style="color:MediumSeaGreen;" >Cars:</p>
+    <ul>
+        {% for car in object.cars.all %}
+        <li style="border: 2px solid DodgerBlue;" >{{ car.model.brand.name }} {{ car.model.name }}</li>
+        {% empty %}
+        <li>No cars have been added yet.</li>
+        {% endfor %}
+    </ul>
+</div>
