@@ -21,7 +21,7 @@ from .views import MainPageTemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', MainPageTemplateView.as_view(),),
-    path('cars/', include('apps.cars.urls', namespace='cars')),
-    path('dealers/', include('apps.dealers.urls', namespace='dealers')),
-    path('orders/', include('apps.orders.urls', namespace='orders')),
+    path('cars/', include('car_app.cars.urls', namespace='cars')),
+    path('dealers/', include('car_app.dealers.urls', namespace='dealers')),
+    path('orders/', include('car_app.orders.urls', namespace='orders')),
 ]
