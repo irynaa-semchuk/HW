@@ -11,7 +11,19 @@ app = Flask(__name__)
 def homepage():
     return render_template("homepage.html")
 
+def query(q, cnt, mode, lon, lan, type, lat, units):
+    return {"q": q, "cnt": cnt, "mode": mode, "lon": lon, "type": type, "lat": lat,
+            "units": units}
 
+def weather_headers():
+    return {
+        "x-rapidapi-key": Config.WEATHER_API_KEY,
+        "x-rapidapi-host": Config.WEATHER_API_HOST
+    }
+
+def weather_request(headers, querystring):
+    return requests.request("GET", Config.WEATHER_API_URL, headers=headers, params=querystring)
+    
 @app.route('/search', methods=['POST'])
 def search_weather():
     weather = []
@@ -19,13 +31,9 @@ def search_weather():
     cities = cities.replace(" ", "")
     _list = cities.split(",")
     for city in _list:
-        querystring = {"q": city, "cnt": "1", "mode": "null", "lon": "0", "type": "link, accurate", "lat": "0",
-                       "units": "metric"}
-        headers = {
-            'x-rapidapi-key': Config.WEATHER_API_KEY,
-            'x-rapidapi-host': Config.WEATHER_API_HOST
-        }
-        response = requests.request("GET", Config.WEATHER_API_URL, headers=headers, params=querystring)
+        querystring = query(city, "1", "null", "0", "link, accurate", "0", "metric")
+        headers = weather_headers()
+        response = weather_request(headers, querystring)
         
         if response.status_code == 200:
             data = response.json()
@@ -42,15 +50,9 @@ def search_weather_location():
     weather = []
     lat = request.form.get("lat")
     lon = request.form.get("lon")
-    querystring = {"q": "", "cnt": "1", "mode": "null", "lon": lon, "type": "link, accurate", "lat": lat,
-                   "units": "metric"}
-
-    headers = {
-        'x-rapidapi-key': Config.WEATHER_API_KEY,
-        'x-rapidapi-host': Config.WEATHER_API_HOST
-    }
-
-    response = requests.request("GET", Config.WEATHER_API_URL, headers=headers, params=querystring)
+    querystring = qsmake("", "1", "null", lon, "link, accurate", lat, "metric")
+    headers = weather_headers()
+    response = weather_request(headers, querystring)
     data = response.json()
 
     if response.status_code == 200:
