@@ -9,3 +9,4 @@ with open('django_success.log') as log_file:
     changes = re.sub(r'\/admin\/', '/####/', changes)
     with open('new_django.log', 'a') as file:
         file.write(changes)
+        
