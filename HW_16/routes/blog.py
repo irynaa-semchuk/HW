@@ -5,6 +5,7 @@ from flask import render_template, request, Response
 from config import Config, articles
 from flask_restful import Resource, Api
 from models.models import Article, User
+from django.core.paginator import Paginator
 
 
 @app.route('/', methods=["GET"])
@@ -30,14 +31,13 @@ class MenuItem(Resource):
 class Articles(Resource):
     def post(self):
         data = request.json
-        article = Article(
-            title=data.get('title'),
-            slug=data.get('slug'),
-            author_id=data.get('author_id'),
-            description=data.get('description'),
-            short_description=data.get('short_description'),
-            img=data.get('img')
-        )
+        paginator = Paginator(tuple(data.items()), 1)
+        page = request.GET.get('page')
+        try:
+            p = paginator.page(page)
+        except PageNotAnInteger:
+            p = paginator.page(pag for pag in paginator.page_range)
+        article = Article(p)
         db.session.add(article)
         db.session.commit()
         return article.serialize
@@ -47,15 +47,11 @@ class Articles(Resource):
         if request.args.get('title'):
             articles = articles.filter_by(title=request.args.get('title'))
 
-        # articles = articles.filter(Article.title.startswith('A'))
-
         if request.args.get("sort_by"):
             articles = articles.order_by(request.args.get("sort_by"))
 
         articles = articles.all()
-        serialized_articles = []
-        for article in articles:
-            serialized_articles.append(article.serialize)
+        serialized_articles = [article.serialize for article in user.articles]
 
         return serialized_articles
 
@@ -71,10 +67,9 @@ class ArticlesEntity(Resource):
 class Users(Resource):
     def get(self):
         user = User.query.get(1)
-        serialized_articles = []
-        for article in user.articles:
-            print(article)
-            serialized_articles.append(article.serialize)
+        if user is None:
+            return Response(status=404)
+        serialized_articles = [article.serialize for article in user.articles]
         return serialized_articles
 
 
@@ -112,15 +107,13 @@ class User_Create(Resource):
 class User_Read(Resource):
     def get(self, id):
         user = User.query.get(id)
-        if user is not None:
-            serialized_articles = []
-            for article in user.articles:
-                serialized_articles.append(article.serialize)
-            serialized_user = [user.serialize, serialized_articles]
-            return serialized_user
+        if user is None:
+            return Response(status=404)
         else:
             abort(404, 'Person not found for Id: {id}'.format(id=id))
-
+        serialized_articles = [article.serialize for article in user.articles]
+        serialized_user = [user.serialize, serialized_articles]
+        return serialized_user
 
 
 api.add_resource(MenuItem, '/menu-items')
