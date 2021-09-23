@@ -2,6 +2,7 @@ from app import app, api
 from flask import render_template, request
 from config import Config, articles
 from flask_restful import Resource, Api
+from todo import Todo, TodoList
 
 
 @app.route('/', methods=["GET"])
@@ -27,4 +28,5 @@ class FooterItem(Resource):
 
 api.add_resource(MenuItem, '/menu-items')
 api.add_resource(FooterItem, '/footer-items')
-
+api.add_resource(Todo, '/todos/<int:todo_id>')
+api.add_resource(TodoList, '/todos')
