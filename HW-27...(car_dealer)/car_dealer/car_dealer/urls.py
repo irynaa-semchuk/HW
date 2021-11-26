@@ -25,4 +25,4 @@ urlpatterns = [
     path('dealers/', include('car_app.dealers.urls', namespace='dealers')),
     path('orders/', include('car_app.orders.urls', namespace='orders')),
     path('newsletters/', include('car_app.newsletters.urls', namespace='newsletters')),
-]
+
