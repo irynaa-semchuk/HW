@@ -1,0 +1,8 @@
+<h1 style="background-color:DodgerBlue;">Order: {{ object.first_name }} {{ object.last_name }}</h1>
+<div>
+    <p>Car: {{ object.car.model.brand.name }} {{ object.car.model.name }}</p>
+    <p>Status: {{ object.status }}</p>
+    <p>Phone: {{ object.phone }}</p>
+    <p>Email: {{ object.email }}</p>
+    <p style="border: 2px solid DodgerBlue;">Message: {{ object.message }}</p>
+</div>
