@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'car_app.cars',
     'car_app.dealers',
     'car_app.orders',
+    'car_app.newsletters',
 ]
 
 MIDDLEWARE = [

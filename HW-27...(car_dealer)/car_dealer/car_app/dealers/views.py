@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
-from apps.dealers.models import Dealer
+from car_app.dealers.models import Dealer
 
 
 class DealersListView(ListView):
